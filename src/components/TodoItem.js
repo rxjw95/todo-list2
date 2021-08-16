@@ -67,7 +67,8 @@ const TodoItemBlock = styled.div`
     }
 `;
 
-export default function TodoItem({ id, done, text }) {
+export default React.memo(function TodoItem({ id, done, text }) {
+    console.log('item 생성');
     const dispatch = useTodoDispatch();
     const onToggle = () => {
         dispatch({
@@ -93,4 +94,4 @@ export default function TodoItem({ id, done, text }) {
             </Remove>
         </TodoItemBlock>
     );
-}
+});
