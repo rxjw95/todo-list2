@@ -9,6 +9,9 @@ const initialState = [
 
 function todoReducer(state, action) {
     switch (action.type) {
+        case 'RESET':
+            return [];
+
         case 'CREATE':
             return state.concat(action.todo);
 
