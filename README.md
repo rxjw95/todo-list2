@@ -1,5 +1,8 @@
 # 두 번째 todo-list
 
+![투두리스트 시현 동영상](https://user-images.githubusercontent.com/62179353/129571925-7abe7742-144c-4650-8d5d-890934e11c1a.gif)
+
+
 ## 계기
 
 -   react hooks를 사용한 투두 리스트를 만들어보고 싶었다.
