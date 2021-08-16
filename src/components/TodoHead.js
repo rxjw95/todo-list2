@@ -53,6 +53,16 @@ const TodoHeadBlock = styled.div`
         border-radius: 6px;
         float: right;
         cursor: pointer;
+        animation: fadein 0.2s;
+
+        @keyframes fadein {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
 
         &:hover {
             background: ${darken(0.1, '#20e997')};
@@ -77,7 +87,7 @@ export default function TodoHead() {
         weekday: 'long',
     });
 
-    const unDoneTasks = todos.filter((todo) => !todo.done);
+    const unDoneTasksCnt = todos.filter((todo) => !todo.done).length;
 
     const dispatch = useTodoDispatch();
     const nextId = useTodoNextId();
@@ -94,11 +104,15 @@ export default function TodoHead() {
             <h1>{day}</h1>
             <div className='days'>{dayName}</div>
             <div className='tasks-left'>
-                할 일이 {unDoneTasks.length} 개 남았습니다.
+                할 일이 {unDoneTasksCnt} 개 남았습니다.
             </div>
-            <div className='reset-right' onClick={onReset}>
-                RESET
-            </div>
+            {unDoneTasksCnt === 0 ? (
+                false
+            ) : (
+                <div className='reset-right' onClick={onReset}>
+                    RESET
+                </div>
+            )}
         </TodoHeadBlock>
     );
 }
