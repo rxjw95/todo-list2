@@ -50,6 +50,7 @@ const Text = styled.div`
         props.done &&
         css`
             color: lightgray;
+            text-decoration: line-through;
         `};
 `;
 
