@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { MdAdd } from 'react-icons/md';
 import { darken, lighten } from 'polished';
+import { useTodoDispatch, useTodoNextId } from '../TodoContext';
 
 const CircleButton = styled.button`
     background: #38d9a9;
@@ -59,7 +60,7 @@ const InsertFormPositioner = styled.div`
     position: absolute;
 `;
 
-const InsertForm = styled.div`
+const InsertForm = styled.form`
     background: #e6e9eb;
     padding: 32px;
     padding-bottom: 72px;
@@ -80,18 +81,45 @@ const Input = styled.input`
 
 export default function TodoCreate() {
     const [open, setOpen] = useState(false);
+    const [value, setValue] = useState('');
+    const dispatch = useTodoDispatch();
+    const nextId = useTodoNextId();
 
     const onToggle = () => {
         setOpen(!open);
-        console.log('click');
+    };
+
+    const onChange = (e) => {
+        setValue(e.target.value);
+        console.log(value);
+    };
+
+    const onSubmit = (e) => {
+        e.preventDefault(); //onSubmit은 내부적으로 자동으로 새로고침이 되서 데이터가 날아간다 이를 방지하기 위한 함수
+        dispatch({
+            type: 'CREATE',
+            todo: {
+                id: nextId.current,
+                text: value,
+                done: false,
+            },
+        });
+        setValue('');
+        setOpen(false);
+        nextId.current += 1;
     };
 
     return (
         <>
             {open && (
                 <InsertFormPositioner>
-                    <InsertForm>
-                        <Input placeholder='할 일을 입력하세요' autoFocus />
+                    <InsertForm onSubmit={onSubmit}>
+                        <Input
+                            placeholder='할 일을 입력하세요'
+                            value={value}
+                            onChange={onChange}
+                            autoFocus
+                        />
                     </InsertForm>
                 </InsertFormPositioner>
             )}
