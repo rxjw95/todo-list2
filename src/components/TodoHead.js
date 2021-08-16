@@ -6,6 +6,7 @@ const TodoHeadBlock = styled.div`
     padding-left: 32px;
     padding-right: 32px;
     padding-left: 24px;
+
     border-bottom: 1px solid gray;
 
     h1 {
@@ -24,14 +25,15 @@ const TodoHeadBlock = styled.div`
         color: #20e997;
         font-size: 18px;
         margin-top: 40px;
+        margin-bottom: 10px;
         font-weight: bold;
     }
 `;
 export default function TodoHead() {
     return (
         <TodoHeadBlock>
-            <h1>오늘의 항링ㄹ</h1>
-            <div className='days'>요일</div>
+            <h1>오늘의 할 일</h1>
+            <div className='days'>월요일, Mon</div>
             <div className='tasks-left'>할일 몇개 남음</div>
         </TodoHeadBlock>
     );
